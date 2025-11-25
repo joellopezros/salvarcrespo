@@ -1,0 +1,260 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Salvemos a Crespo Crespillo — Campaña</title>
+  <style>
+    :root{--bg:#0f1319;--card:#0f1720;--accent:#1e90ff;--glass:rgba(255,255,255,0.04);--text:#e6eef8;--star:#FFFFFF;}
+    html,body{min-height:100vh;margin:0;font-family:Inter, system-ui, -apple-system, Arial;background:linear-gradient(180deg,#05070a 0%, #0a0d14 100%);color:var(--text);}
+    .wrap{max-width:800px;margin:20px auto;padding:16px;text-align:center;}
+    header{display:flex;flex-direction:column;gap:16px;align-items:center;justify-content:center;}
+    .logo img{border-radius:12px; max-width:100%; height:auto; display:block;}
+    h1{margin:0;font-size:1.6rem}
+    .grid{display:flex;flex-direction:column;gap:20px;margin-top:20px;align-items:center;}
+    .card{background:linear-gradient(145deg, rgba(30,45,70,0.45), rgba(10,15,25,0.7));border-radius:24px;padding:28px;box-shadow:0 12px 30px rgba(0,0,0,0.55), 0 0 25px rgba(30,144,255,0.25);border:1px solid rgba(255,255,255,0.06);display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;gap:14px;backdrop-filter:blur(6px);transition:transform .5s ease, box-shadow .5s ease,width .5s ease; width:100%;max-width:600px;}
+    .card-content{width:100%;}
+    .muted{color:rgba(230,238,248,0.65);font-size:.95rem}
+    .actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px;justify-content:center;}
+    .btn{padding:12px 18px;border-radius:12px;background:var(--accent);color:#021427;text-decoration:none;font-weight:600;white-space:nowrap;flex-shrink:0;display:inline-flex;align-items:center;justify-content:center;}
+    .secondary{background:transparent;border:1px solid rgba(255,255,255,0.06);color:var(--text)}
+    .song-list{list-style:none;padding:0;margin:1}
+    .song-list li{padding:12px;border-radius:8px;margin-bottom:8px;background:var(--glass);display:flex;justify-content:space-between;align-items:center}
+    footer{margin-top:22px;text-align:center;color:rgba(230,238,248,0.6);}
+    .center{text-align:center}
+    .big{font-size:1.1rem}
+    .card:hover{transform:scale(1.08) translateY(-10px);box-shadow:0 0 30px var(--star), 0 0 50px var(--star), 0 20px 50px rgba(0,0,0,0.65);}
+  </style>
+</head>
+<body>
+
+</script>
+  <div class="wrap">
+    <header>
+      <h1>Javier Crespo Crespillo está nominado, ¡nos necesita! 🫵🏽</h1>
+      <p class="muted">Si habéis llegado aquí bienvenidos al delirio colectivo. Esta semana tenemos un largo y duro trabajo, salvar a Crespo, si con esto podemos llegar a infinidad de personas, lo haremos. Subid el volumen anda, que os dejo un regalo... 🎸</p>
+    </header>
+
+    <div id="mainGrid" class="grid"></div>
+
+    <footer>Comparte en redes sociales, disfruta de su música y lo más importante: SALVAR CRESPO. 📲</footer>
+  </div>
+
+  <!-- Música de fondo -->
+  <audio id="bgMusic" loop>
+    <source src="despacio.mp3" type="audio/mpeg">
+    Tu navegador no soporta audio HTML5.
+  </audio>
+
+  <!-- Modal de bienvenida -->
+  <div id="welcomeModal" style="position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.85); display:flex; justify-content:center; align-items:center; z-index:9999;">
+    <div style="background:linear-gradient(135deg,#555,#999); padding:32px; border-radius:20px; text-align:center; max-width:400px; color:#fff; box-shadow:0 0 40px rgba(255,255,255,0.7);">
+      <h2>Bienvenido al universo de Javier Crespo Crespillo ✨</h2>
+      <p>¿Estás listo para unirte a la locura? 😈</p>
+      <button id="acceptBtn" style="margin-top:20px; padding:12px 24px; font-size:1rem; font-weight:700; border:none; border-radius:12px; background:#ccc; color:#021427; cursor:pointer; transition:transform .2s;" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'">Aceptar</button>
+    </div>
+  </div>
+
+  <script>
+    const modal = document.getElementById('welcomeModal');
+    const acceptBtn = document.getElementById('acceptBtn');
+    const music = document.getElementById('bgMusic');
+
+    acceptBtn.addEventListener('click', () => {
+      modal.style.display = 'none';
+      music.play().catch(()=>{console.log('Haz click en cualquier lugar para activar la música.')});
+    });
+
+    const artistLinks = [
+      {name: 'Javier Crespo — A44 🎧', url: 'https://open.spotify.com/intl-es/track/6WnRiLjqAN149Wou7yj0PN?si=af0a0b48a2854e26'},
+      {name: 'Javi Crespo - despacio 🎧', url: 'https://open.spotify.com/intl-es/track/5qPL9JLevs8FV47RYK3hOB?si=9b48efe727d444a7'},
+      {name: 'Javi Crespo - panas 🎧', url: 'https://open.spotify.com/intl-es/track/6Q8shVWdAEqy5oKx8rsTyf?si=922e949dbce8429a'},
+      {name: 'Javi Crespo - explicarte 🎧', url: 'https://open.spotify.com/intl-es/track/18APnwp9lFdP6X6hqcZzAR?si=8901ff0ea2e443ec'},
+      {name: 'Javi Crespo - tinta permanente 🎧', url: 'https://open.spotify.com/intl-es/track/339eKWX3Hx0UxbFUmvjUE7?si=cf8a7cb5cf234367'},
+      {name: 'Javi Crespo - shoko 🎧', url: 'https://open.spotify.com/intl-es/track/4bVEz2MfsIhAABHL21Rb99?si=09e6305548dc412a'},
+      {name: 'Javi Crespo - Santa Clara 🎧', url: 'https://open.spotify.com/intl-es/track/4EHKdUOvVTkT8vMx44EEbh?si=0682090176bd4a0d'},
+      {name: 'Javi Crespo, Delgao - Peligrando 🎧', url: 'https://open.spotify.com/intl-es/track/6bd4l4uLZiYCn9keuACcl3?si=657a70eac1934051'},
+      {name: 'Javi Crespo - besos impresos 🎧', url: 'https://open.spotify.com/intl-es/track/5pVAcytO1c8dONvzQXnd4N?si=a3336824ba34466c'},
+    ];
+
+    const saveApps = [
+      {name:'Aplicación para Android 👾', url:'https://play.google.com/store/apps/details?id=com.gestmusic.ot2023'},
+      {name:'Aplicación para IOS 🍎', url:'https://apps.apple.com/es/app/ot-2025/id6463131545'},
+    ];
+
+    const saveApps2 = [
+      {name:'Tik Tok 🎬', url:'https://www.tiktok.com/@xrespo_'},
+      {name:'Instagram 📸', url:'https://www.instagram.com/xrespo_/'},
+      {name:'Tik Tok OT 🎬', url:'https://www.tiktok.com/@crespo.ot2025'},
+      {name:'Instagram OT 📸', url:'https://www.instagram.com/ot2025.crespo/'},
+    ];
+
+    const saveApps3 = [
+      {name:'Crespo, Gala 0',                   url:'https://youtu.be/0z7HWwyBM_4?si=3ofAZGG7kj9jDTU5'},
+      {name:'Crespo y Guille Toledano, Gala 1', url:'https://youtu.be/FByNdsmd1J0?si=EFwfRJ6gzAoXuYB1'},
+      {name:'Crespo y María Cruz, Gala 2',      url:'https://youtu.be/f3rr9aVzuIg?si=toJtfXIzCqrWrZHv'},
+      {name:'Crespo y Tinho, Gala 3',           url:'https://youtu.be/NTfbfgmu4uU?si=3qsSdHY5N1BeYiEg'},
+      {name:'Crespo y Olivia, Gala 4',          url:'https://youtu.be/DGmUKrU_Mu4?si=JaYOWPdVLzmwvjOo'},
+      {name:'Crespo y Claudia Arenas, Gala 5',  url:'https://youtu.be/9QDRY6Wg-oU?si=55ZiDJ7_T0OJk374'},
+      {name:'Crespo, Gala 6',                   url:'https://youtu.be/KOPW7ehDH6E?si=Sv7Fwe9B8jsO6aZy'},
+      {name:'Crespo y Téyou, Gala 7',           url:'https://youtu.be/dqxWykPQoIo?si=QDMkD-RbuSYnu9cv'},
+      {name:'Crespo, Gala 8',                   url:'https://youtu.be/twJIPlin8H4?si=c8-OOtLWXa3RaVal'},
+      {name:'Crespo, Gala 9',                   url:'https://youtu.be/cA9qF4KTWiw?si=zGX4Wov8dmX2KEeQ'},
+      {name:'Crespo, Gala 10',                  url:'https://youtu.be/OdejW5dUok8?si=R08FNTbc0Vvppo1z'},
+
+    ];
+    const saveApps4 = [
+      {name:'"Terriblemente Cruel" - Amazon Music', url:'https://www.amazon.es/dp/B0G3D256S7/ref=sr_1_2?__mk_es_ES=%C3%85M%C3%85%C5%BD%C3%95%C3%91&crid=2FF8M817DX4EP&dib=eyJ2IjoiMSJ9.DiHT1htxHiL78-SDBGYvq5WNFOYPOMcBb8I7O32LAYBMqMDYLRFlcYoBvbWty_gioYTC1DWH8pHI7O3PP0Fvpz4Gp_DO2_j6-Y04uWcgqkFgT4PQ2SEQO4GH9FI33PS4P5dKlJYt-Mi8FCncdBnq1e4pxpfTypUopsN93rSADjiBNuTxAnj72UvKsxL7C3DM_g7rwgGXNXSyhAWLQ_U7Wf3GGzd8WJT5G9P9OrIss6lTcSthaAeXhC0gZQ8uahyuAZNLESMkq6dSggQPSDBpqJAEvWVcgI2KrywSMM23Too.BFqMJJGdYfCFVMGtbm6Gsba2UZvTSVA5RuxdB7SWKZM&dib_tag=se&keywords=terriblemente+cruel&marketplaceId=A1RKKUPIHCS9HS&musicTerritory=ES&qid=1764064135&sprefix=terriblemente+cruel%2Caps%2C94&sr=8-2&trackAsin=B0G3D256S7'},
+    ];
+
+    const sections = [
+      function headerCard(){
+        const d = document.createElement('div'); d.className='card';
+        d.innerHTML = `<h2>Presentación ⭐</h2><div class='card-content'><p class='muted'>Javier Crespo Crespillo, nacido en Lucena, Córdoba. Tiene 21 años, en la flor de la vida vamos. Desde el día 1 ha dejado claro que su objetivo era vivirlo hasta el final. Su paso por La Voz le dejó como ganador en 2022 gracias a la ayuda de Antonio Orozco, su coach. Muchos lo conoceréis por su paso actual en el programa de Operación Triunfo.
+        Si todavía no lo conoces... Solucionado el problema :D, además Javier te necesita, ¡a ti y a todos! Mientras sigues descubriendo sobre Crespo, te recomiendo seguir investigando la página. ¡Además os dejo todas sus redes sociales!</p><div class='actions' id='apps'></div></div>`;
+        setTimeout(()=>{
+          const container = d.querySelector('#apps');
+          saveApps2.forEach(a=>{
+            const aEl = document.createElement('a'); aEl.className='btn secondary'; aEl.href=a.url; aEl.target='_blank'; aEl.textContent=a.name; container.appendChild(aEl);
+          });
+        },0);
+        return d; 
+      },
+      function spotifyCard(){
+        const d = document.createElement('div'); d.className='card';
+        d.innerHTML = `<h2>Spotify de Javier Crespo Crespillo 🟢</h2><div class='card-content'><p class='muted'>Aquí tenéis las canciones que tenía antes de entrar al programa, vamos a darle un chute de visitas.</p><ul class='song-list' id='spList'></ul></div>`;
+        setTimeout(()=>{
+          const ul = d.querySelector('#spList');
+          artistLinks.forEach(a=>{
+            const li = document.createElement('li');
+            li.innerHTML = `<span>${a.name}</span><span style='display:flex;gap:8px'><a class='btn secondary' href='${a.url}' target='_blank'>Abrir</a>`;
+            ul.appendChild(li);
+          });
+        },0);
+        return d;
+      },
+      function actionsCard(){
+        const d = document.createElement('div'); d.className='card';
+        d.innerHTML = `<h2>¡Aplicación para salvarlo! 🚀</h2><div class='card-content'><p class='muted'>Para salvar a Crespo solo se puede votar desde la aplicación oficial de Operación Triunfo. Se permite un voto diario por dispositivo, si tienes más de 1 dispositivo, ¡utilízalo! Os dejo los enlaces directos para que vuestros diferentes sistemas, tanto Android como IOS. ¿Cómo funciona el voto? Pues es super fácil: abrir la aplicación, buscar abajo el corazón de salvar y pulsar encima de Crespo, ¿fácil no?. ¡Pues queremos ver todas las máquinas funcionando sin parar!
+        Crespo defenderá su nominación cantando Columbia de Quevedo. Para los que no conozcáis la canción podéis ir a escucharla pulsando <a style="color: white;" href="https://www.youtube.com/watch?v=QlZNGcVfeF0&list=RDQlZNGcVfeF0&start_radio=1">aquí.</a></p><div class='actions' id='apps'></div></div>`;
+        setTimeout(()=>{
+          const container = d.querySelector('#apps');
+          saveApps.forEach(a=>{
+            const aEl = document.createElement('a'); aEl.className='btn secondary'; aEl.href=a.url; aEl.target='_blank'; aEl.textContent=a.name; container.appendChild(aEl);
+          });
+        },0);
+
+        return d;
+      },
+      function headerCard(){
+        const d = document.createElement('div'); d.className='card';
+        d.innerHTML = `<h2>Su paso por Operación Triunfo 🎤</h2><div class='card-content'><p class='muted'>El día 15 de septiembre arrancó la edición de OT 2025, desde entonces ha cantado cada semana una canción diferente, ¿le damos un vistazo a los repasos de sus galas? Algunas Galas tienen la canción completa, las últimas puedes verlas completas en Amazon Prime Video (no pagan, pero que menos, ¿no?). </p><div class='actions' id='apps'></div></div>`;
+        setTimeout(()=>{
+          const container = d.querySelector('#apps');
+          saveApps3.forEach(a=>{
+            const aEl = document.createElement('a'); aEl.className='btn secondary'; aEl.href=a.url; aEl.target='_blank'; aEl.textContent=a.name; container.appendChild(aEl);
+          });
+        },0);
+        return d; 
+      },
+
+      function headerCard(){
+        const d = document.createElement('div'); d.className='card';
+        d.innerHTML = `<h2>Ya disponible "Terriblemente Cruel" en Amazon Music 📦</h2><div class='card-content'><p class='muted'>Javier Crespo consiguió llegar al número 1 de Amazon Music, vamos a llevar ese apoyo a lo largo de toda esta semana.</p><div class='actions' id='apps'></div></div>`;
+        setTimeout(()=>{
+          const container = d.querySelector('#apps');
+          saveApps4.forEach(a=>{
+            const aEl = document.createElement('a'); aEl.className='btn secondary'; aEl.href=a.url; aEl.target='_blank'; aEl.textContent=a.name; container.appendChild(aEl);
+          });
+        },0);
+        return d; 
+      },
+    ];
+
+    function shuffle(arr){
+      for(let i=arr.length-1;i>0;i--){
+        const j=Math.floor(Math.random()*(i+1));[arr[i],arr[j]]=[arr[j],arr[i]];
+      }
+      return arr;
+    } 
+
+    (function mount(){
+      const grid = document.getElementById('mainGrid');
+      const chosen = shuffle(sections.slice()).slice(0,5);
+      chosen.forEach(fn=>grid.appendChild(fn()));
+    })();
+
+    document.addEventListener('click', e=>{
+      if(e.target && e.target.id==='shareBtn'){
+        if(navigator.share){
+          navigator.share({title:'Salvemos a Crespo Crespillo',text:'Apoya a Crespo en OT',url:location.href});
+        } else {
+          alert('Copia la URL y compártela en tus redes.');
+        }
+      }
+    });
+
+    document.addEventListener('DOMContentLoaded',()=>{
+      document.querySelectorAll('.card').forEach(card=>{
+        const children=[...card.children];
+        const title=children.shift();
+        const wrap=document.createElement('div');
+        wrap.className='hidden-info';
+        children.forEach(c=>wrap.appendChild(c));
+        card.appendChild(wrap);
+        card.insertBefore(title,wrap);
+      });
+    });
+
+    const style=document.createElement('style');
+    style.textContent=`
+      .card{position:relative;overflow:hidden;}
+      .hidden-info{opacity:0;max-height:0;transform:translateY(10px);transition:opacity .45s ease, max-height .6s ease, transform .45s ease;}
+      .card:hover .hidden-info{opacity:1;max-height:3000px;transform:translateY(0);}
+    `;
+    document.head.appendChild(style);
+
+    // Estrellas en movimiento detrás de todo
+    const canvas = document.getElementById('starCanvas');
+    const ctx = canvas.getContext('2d');
+    let stars = [];
+    const numStars = 150;
+
+
+    function resizeCanvas(){
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+    }
+    window.addEventListener('resize', resizeCanvas);
+    resizeCanvas();
+
+
+    for(let i=0;i<numStars;i++){
+    stars.push({x:Math.random()*canvas.width, y:Math.random()*canvas.height, r:Math.random()*1.5+0.5, speed:Math.random()*0.5+0.1});
+    }
+
+
+    function drawStars(){
+    ctx.clearRect(0,0,canvas.width,canvas.height);
+    ctx.fillStyle='white';
+    stars.forEach(s=>{
+    ctx.beginPath();
+    ctx.arc(s.x,s.y,s.r,0,Math.PI*2);
+    ctx.fill();
+    s.y -= s.speed;
+    if(s.y<0) s.y=canvas.height;
+    });
+    requestAnimationFrame(drawStars);
+    }
+    drawStars();
+
+    acceptBtn.addEventListener('click', () => {
+    modal.style.display = 'none';
+    music.play().catch(()=>{console.log('Haz click en cualquier lugar para activar la música.')});
+});
+document.head.appendChild(style);
+  </script>
+</body>
+</html>
+
+
